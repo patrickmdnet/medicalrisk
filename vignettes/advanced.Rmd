@@ -9,6 +9,7 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteDepends{plyr, reshape2, ggplot2, gridExtra}
 ---
+
 Introduction
 ------------
 To demonstrate how the **medicalrisk** package can be useful, this vignette shows the kinds of 
