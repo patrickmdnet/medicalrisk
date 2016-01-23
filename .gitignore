@@ -1,7 +1,5 @@
 data
 man
-*.rda
-inst/doc
 vignettes/*.html
 vignettes/*.md
 vignettes/advanced_cache
