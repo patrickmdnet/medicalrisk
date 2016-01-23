@@ -27,3 +27,6 @@ License: GPL-3 | file LICENSE
 LazyData: true
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
+BugReports: https://github.com/patrickmdnet/medicalrisk/issues
+URL: https://github.com/patrickmdnet/medicalrisk
+
