@@ -1,3 +1,4 @@
+..RCheck/
 data
 man
 vignettes/*.html
@@ -5,4 +6,17 @@ vignettes/*.md
 vignettes/advanced_cache
 vignettes/cache
 vignettes/figure
+.RData
+.Rhistory
+.Rproj.user/
+datasrc/All Proc - Step 4 - 1YRPOD - May-20-10.csv
+datasrc/All Proc - Step 4 - 30DLOS - May-20-10.csv
+datasrc/All Proc - Step 4 - 30DPOD - May-20-10.csv
+datasrc/All Proc - Step 4 - INHOSP - May-20-10.csv
+datasrc/CMS32_DESC_SHORT_DX.txt
+datasrc/CMS32_DESC_SHORT_SG.txt
+datasrc/icd9cm.zip
+datasrc/rsi.zip
+datasrc/sample data rev2.csv
+datasrc/sample results rev2.csv
 
