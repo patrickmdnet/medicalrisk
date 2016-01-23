@@ -9,6 +9,7 @@ bibliography:
 vignette: >
   %\VignetteIndexEntry{medicalrisk: Calculating risk and comorbidities from ICD-9-CM codes}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{plyr}
 ---
 Introduction
 ------------

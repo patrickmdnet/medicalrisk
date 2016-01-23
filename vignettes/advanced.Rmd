@@ -7,6 +7,7 @@ output:
 vignette: >
   %\VignetteIndexEntry{medicalrisk: Correlating ICU days with mortality risk and comorbidities}
   %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteDepends{plyr, reshape2, ggplot2, gridExtra}
 ---
 Introduction
 ------------
