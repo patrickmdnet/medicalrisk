@@ -25,14 +25,14 @@ Medical chart abstraction just isn't feasible for projects of this scale.
 In the United States, the records for every inpatient and outpatient encounter is 
 reviewed by a qualified medical coder who assigns a set of diagnosis and procedural codes based
 on phrases within the medical record.  The coding system currently in use is 
-[ICD-9-CM](http://en.wikipedia.org/ICD-9-CM/).
+[ICD-9-CM](http://en.wikipedia.org/wiki/ICD-9-CM).
 ICD-9-CM is an adaptation of the venerable ICD-9 standard which was developed in 1978.
 The 
-[U.S. National Center for Health Statistics (NCHS)]() 
+[U.S. National Center for Health Statistics (NCHS)](http://www.cdc.gov/nchs/) 
 developed ICD-9-CM, which has been required for Medicare and Medicaid claims 
 since 1979.  ICD-9-CM is updated annually.
 
-At some point, perhaps as soon as October 2015, [ICD-10-CM codes]()
+At some point, perhaps as soon as October 2015, [ICD-10-CM codes](http://www.cdc.gov/nchs/icd/icd10cm.htm)
 will need to be used instead.
 It is likely that "dual coding" of claims in both sets will continue for some time.
 
