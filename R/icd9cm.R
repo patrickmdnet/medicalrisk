@@ -1,19 +1,19 @@
 #' Create Deyo map of ICD-9-CM to Charlson comorbidities
-#' 
+#'
 #' Function that generates a data frame linking ICD-9-CM codes to the Charlson
 #' comorbidity categories using the Deyo mapping.
-#' 
+#'
 #' NOTE: The input vector of ICD-9-CM codes must be unique, because the output dataframe
 #' uses the ICD-9-CM code as row.name.
-#' 
+#'
 #' Uses regular expressions created from the paper by Deyo in 1992.
-#' 
-#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with 
+#'
+#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with
 #' 'D' while procedure codes are prefixed with 'P'. So, diagnostic code
 #' \code{404.03} should be \code{"D40403"}.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
-#' @return A data frame, with ICD9 codes as row names and one logical column for each 
+#' @return A data frame, with ICD9 codes as row names and one logical column for each
 #' comorbidity in \code{\link{charlson_list}}
 #' @references 1. Deyo RA, Cherkin DC, Ciol MA: Adapting a clinical comorbidity index for
 #' use with ICD-9-CM administrative databases. Journal of clinical epidemiology
@@ -27,12 +27,12 @@
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"))
-#' cases_with_cm <- merge(cases, icd9cm_charlson_deyo(levels(cases$icd9cm)), 
+#' cases_with_cm <- merge(cases, icd9cm_charlson_deyo(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
-#' 
+#'
 #' # generate crude comorbidity summary for each patient
 #' library(plyr)
-#' ddply(cases_with_cm, .(id), 
+#' ddply(cases_with_cm, .(id),
 #'   function(x) { data.frame(lapply(x[,3:ncol(x)], any)) })
 #' @export
 icd9cm_charlson_deyo <- function(icd9) {
@@ -58,21 +58,21 @@ icd9cm_charlson_deyo <- function(icd9) {
 }
 
 #' Create Romano map of ICD-9-CM to Charlson comorbidities
-#' 
-#' Function that creates a dataframe which links ICD-9-CM codes to the Charlson 
+#'
+#' Function that creates a dataframe which links ICD-9-CM codes to the Charlson
 #' comorbidity categories using the Romano mapping.
-#' 
+#'
 #' NOTE: The input vector of ICD-9-CM codes must be unique, because the output dataframe
 #' uses the ICD-9-CM code as row.name.
-#' 
+#'
 #' Uses regular expressions created from the paper by Romano in 1993.
-#' 
-#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with 
+#'
+#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with
 #' 'D' while procedure codes are prefixed with 'P'. So, diagnostic code
 #' \code{404.03} should be \code{"D40403"}.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
-#' @return A data frame, with ICD9 codes as row names and one logical column for each 
+#' @return A data frame, with ICD9 codes as row names and one logical column for each
 #' comorbidity in \code{\link{charlson_list}}
 #' @references 1. Romano PS, Roos LL, Jollis JG: Adapting a clinical comorbidity index for
 #' use with ICD-9-CM administrative data: differing perspectives. Journal of
@@ -86,12 +86,12 @@ icd9cm_charlson_deyo <- function(icd9) {
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"))
-#' cases_with_cm <- merge(cases, icd9cm_charlson_romano(levels(cases$icd9cm)), 
+#' cases_with_cm <- merge(cases, icd9cm_charlson_romano(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
-#' 
+#'
 #' # generate crude comorbidity summary for each patient
 #' library(plyr)
-#' ddply(cases_with_cm, .(id), 
+#' ddply(cases_with_cm, .(id),
 #'   function(x) { data.frame(lapply(x[,3:ncol(x)], any)) })
 #' @export
 icd9cm_charlson_romano <- function(icd9) {
@@ -117,26 +117,26 @@ icd9cm_charlson_romano <- function(icd9) {
 }
 
 #' Create Quan map of ICD-9-CM to Charlson comorbidities
-#' 
-#' Function that creates a dataframe that links ICD-9-CM codes to the Charlson comorbidity 
+#'
+#' Function that creates a dataframe that links ICD-9-CM codes to the Charlson comorbidity
 #' categories using Quan's method.
-#' 
+#'
 #' NOTE: The input vector of ICD-9-CM codes must be unique, because the output dataframe
 #' uses the ICD-9-CM code as row.name.
-#' 
+#'
 #' Uses regular expressions created from the paper by Quan in 2005.
-#' 
-#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with 
+#'
+#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with
 #' 'D' while procedure codes are prefixed with 'P'. So, diagnostic code
 #' \code{404.03} should be \code{"D40403"}.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
-#' @return A data frame, with ICD9 codes as row names and one logical column for each 
+#' @return A data frame, with ICD9 codes as row names and one logical column for each
 #' comorbidity in \code{\link{charlson_list}}
-#' @references 1. Quan H, Sundararajan V, Halfon P, Fong A, Burnand B, Luthi 
-#'   J-C, Saunders LD, Beck CA, Feasby TE, Ghali WA: Coding algorithms for 
-#'   defining comorbidities in ICD-9-CM and ICD-10 administrative data. Medical 
-#'   care 2005; 43:1130-9 
+#' @references 1. Quan H, Sundararajan V, Halfon P, Fong A, Burnand B, Luthi
+#'   J-C, Saunders LD, Beck CA, Feasby TE, Ghali WA: Coding algorithms for
+#'   defining comorbidities in ICD-9-CM and ICD-10 administrative data. Medical
+#'   care 2005; 43:1130-9
 #'   \url{http://www.ncbi.nlm.nih.gov/pubmed/16224307}
 #
 #' @seealso \code{\link{icd9cm_charlson_deyo}}, \code{\link{icd9cm_charlson_romano}},
@@ -145,15 +145,15 @@ icd9cm_charlson_romano <- function(icd9) {
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"))
-#' cases_with_cm <- merge(cases, icd9cm_charlson_quan(levels(cases$icd9cm)), 
+#' cases_with_cm <- merge(cases, icd9cm_charlson_quan(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
-#' 
+#'
 #' # generate crude comorbidity summary for each patient
 #' library(plyr)
-#' ddply(cases_with_cm, .(id), 
+#' ddply(cases_with_cm, .(id),
 #'   function(x) { data.frame(lapply(x[,3:ncol(x)], any)) })
 #' @export
-icd9cm_charlson_quan <- function(icd9) { 
+icd9cm_charlson_quan <- function(icd9) {
   data.frame(
     row.names = icd9,
     mi = grepl('^D(410|412)', icd9),
@@ -176,27 +176,27 @@ icd9cm_charlson_quan <- function(icd9) {
 }
 
 #' Create Quan map of ICD-9-CM to Elixhauser comorbidities
-#' 
-#' Function to make a dataframe that links ICD-9-CM codes to the Elixhauser comorbidity 
+#'
+#' Function to make a dataframe that links ICD-9-CM codes to the Elixhauser comorbidity
 #' categories using the Quan mapping.
-#' 
+#'
 #' Uses regular expressions created from the Quan paper from 2005.
-#' 
-#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with 
+#'
+#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with
 #' 'D' while procedure codes are prefixed with 'P'. So, diagnostic code
 #' \code{404.03} should be \code{"D40403"}.
-#' 
-#' Some ICD-9-CM codes will correspond to more than one category.  For example, 
-#' \code{404.03} (Hypertensive heart and chronic kidney disease ... stage V) is 
+#'
+#' Some ICD-9-CM codes will correspond to more than one category.  For example,
+#' \code{404.03} (Hypertensive heart and chronic kidney disease ... stage V) is
 #' in both \code{chf} and \code{renlfail} categories.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
-#' @return A data frame, with ICD9 codes as row names and one logical column for each 
+#' @return A data frame, with ICD9 codes as row names and one logical column for each
 #' comorbidity in \code{\link{elixhauser_list}}
-#' @references 1. Quan H, Sundararajan V, Halfon P, Fong A, Burnand B, Luthi 
-#'   J-C, Saunders LD, Beck CA, Feasby TE, Ghali WA: Coding algorithms for 
-#'   defining comorbidities in ICD-9-CM and ICD-10 administrative data. Medical 
-#'   care 2005; 43:1130-9 
+#' @references 1. Quan H, Sundararajan V, Halfon P, Fong A, Burnand B, Luthi
+#'   J-C, Saunders LD, Beck CA, Feasby TE, Ghali WA: Coding algorithms for
+#'   defining comorbidities in ICD-9-CM and ICD-10 administrative data. Medical
+#'   care 2005; 43:1130-9
 #'   \url{http://www.ncbi.nlm.nih.gov/pubmed/16224307}
 #
 #' @seealso \code{\link{icd9cm_charlson_deyo}}, \code{\link{icd9cm_charlson_romano}},
@@ -205,12 +205,12 @@ icd9cm_charlson_quan <- function(icd9) {
 #' # Identify Elixhauser categories
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"))
-#' cases_with_cm <- merge(cases, icd9cm_elixhauser_quan(levels(cases$icd9cm)), 
+#' cases_with_cm <- merge(cases, icd9cm_elixhauser_quan(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
-#' 
+#'
 #' # generate crude comorbidity summary for each patient
 #' library(plyr)
-#' ddply(cases_with_cm, .(id), 
+#' ddply(cases_with_cm, .(id),
 #'   function(x) { data.frame(lapply(x[,3:ncol(x)], any)) })
 #' @export
 icd9cm_elixhauser_quan <- function(icd9) {
@@ -246,50 +246,50 @@ icd9cm_elixhauser_quan <- function(icd9) {
     alcohol = grepl('^D(2652|291[1-35-9]|303[09]|3050|3575|4255|5353|571[0-3]|980|V113)', icd9),
     drug = grepl('^D(292|304|305[2-9]|V6542)', icd9),
     psych = grepl('^D(2938|295|296[0145]4|29[78])', icd9),
-    depress = grepl('^D(296[235]|3004|309|311)', icd9))  
+    depress = grepl('^D(296[235]|3004|309|311)', icd9))
 }
 
 #' Create AHRQ v3.7 map of ICD-9-CM to Elixhauser comorbidities
-#' 
-#' Function makes a dataframe that links ICD-9-CM codes to the Elixhauser comorbidity 
+#'
+#' Function makes a dataframe that links ICD-9-CM codes to the Elixhauser comorbidity
 #' categories using the AHRQ v3.7 mapping.
-#' 
+#'
 #' Uses regular expressions based on the file "comformat2012-2013.txt" from AHRQ.
-#' 
-#' The Agency for Healthcare Research and Quality (AHRQ) has developed 
-#' Comorbidity Software as part of the Healthcare Cost and Utilization Project 
-#' (HCUP).  The software was developed to report on the comorbidity measures 
+#'
+#' The Agency for Healthcare Research and Quality (AHRQ) has developed
+#' Comorbidity Software as part of the Healthcare Cost and Utilization Project
+#' (HCUP).  The software was developed to report on the comorbidity measures
 #' reported by Elixhauser (1998).
-#' 
-#' The AHRQ software has two parts, one that classifies ICD-9-CM codes by 
-#' comorbidity, and another that performs heuristics to eliminate duplicate 
-#' comorbidities and ignore comorbidities which are the primary reason for the 
+#'
+#' The AHRQ software has two parts, one that classifies ICD-9-CM codes by
+#' comorbidity, and another that performs heuristics to eliminate duplicate
+#' comorbidities and ignore comorbidities which are the primary reason for the
 #' hospital visit, as per the DRG.
-#' 
-#' This table is a translation of the first part of the software, the 
+#'
+#' This table is a translation of the first part of the software, the
 #' classifier, as implemented in the SAS file \code{Comformat2012-2013.txt}.
-#' 
-#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with 
+#'
+#' ICD-9-CM codes must have periods removed.  Diagnostic codes are prefixed with
 #' 'D' while procedure codes are prefixed with 'P'. So, diagnostic code
 #' \code{404.03} should be \code{"D40403"}.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
-#' @return A data frame, with ICD9 codes as row names and one logical column for each 
+#' @return A data frame, with ICD9 codes as row names and one logical column for each
 #' comorbidity in \code{\link{elixhauser_list}}
 #' @references 1. \url{http://www.hcup-us.ahrq.gov/toolssoftware/comorbidity/comorbidity.jsp}
-#' 
+#'
 #' @seealso \code{\link{icd9cm_charlson_deyo}}, \code{\link{icd9cm_charlson_romano}},
 #'    \code{\link{icd9cm_charlson_quan}}, \code{\link{icd9cm_elixhauser_quan}}
 #' @examples
 #' # Identify Elixhauser categories
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"))
-#' cases_with_cm <- merge(cases, icd9cm_elixhauser_ahrq37(levels(cases$icd9cm)), 
+#' cases_with_cm <- merge(cases, icd9cm_elixhauser_ahrq37(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
-#' 
+#'
 #' # generate crude comorbidity summary for each patient
 #' library(plyr)
-#' ddply(cases_with_cm, .(id), 
+#' ddply(cases_with_cm, .(id),
 #'   function(x) { data.frame(lapply(x[,3:ncol(x)], any)) })
 #' @export
 icd9cm_elixhauser_ahrq37 <- function(icd9) {
@@ -308,7 +308,7 @@ icd9cm_elixhauser_ahrq37 <- function(icd9) {
   hhrwrf <- grepl('^D404[019]2', icd9)
   hhrwhrf <- grepl('^D404[019]3', icd9)
   ohtnpreg <- grepl('^D642[79]', icd9)
-  
+
   data.frame(
     row.names = icd9,
     chf = grepl('^D(39891|428)', icd9) | htnwchf | hhrwchf | hhrwhrf,
@@ -317,10 +317,10 @@ icd9cm_elixhauser_ahrq37 <- function(icd9) {
     pulmcirc = grepl('^D(4151|416|4179)', icd9),
     perivasc = grepl('^D(44[012]|443[1-9]|4442|4471|449|557[19]|V434)', icd9),
     htn = grepl('^D(401[19]|6420)', icd9),
-    htncx = grepl('^D(4010|4372)', icd9) | 
+    htncx = grepl('^D(4010|4372)', icd9) |
       htnpreg | htnwochf | hrenworf | hhrwohrf |
       htnwchf | hhrwchf | hrenwrf | hhrwrf | hhrwhrf,
-    para = grepl('^D(34[234]|438[2-5]|78072)', icd9),    
+    para = grepl('^D(34[234]|438[2-5]|78072)', icd9),
     neuro = grepl('^D(33[01]|3320|333[457]|33385|33394|33[45]|3380|34[0157]|6494|7687|7803|78097|7843)', icd9),
     chrnlung = grepl('^D(49|50[0-5]|5064)', icd9),
     dm = grepl('^D(250[0-3]|6480|249[0-3])', icd9),
@@ -343,30 +343,30 @@ icd9cm_elixhauser_ahrq37 <- function(icd9) {
     alcohol = grepl('^D(291[0-35-9]|303[09]|3050)', icd9),
     drug = grepl('^D(292|304|305[2-9]|6483)', icd9),
     psych = grepl('^D(29[5678]|2991)', icd9),
-    depress = grepl('^D(3004|30112|309[01]|311)', icd9))  
+    depress = grepl('^D(3004|30112|309[01]|311)', icd9))
 }
 
 #' Create Map of ICD-9-CM to Revised Cardiac Risk Index classes
-#' 
+#'
 #' Function to generate data frame that links ICD-9-CM codes to the RCRI comorbidity categories.
-#' 
-#' Lee et al in 1999 published a "Revised Cardiac Risk Index" based on the work 
-#' on Goldman in 1997. The RCRI is used to determine the major cardiac 
-#' complication risk for a patient about to undergo major noncardiac surgery. 
+#'
+#' Lee et al in 1999 published a "Revised Cardiac Risk Index" based on the work
+#' on Goldman in 1997. The RCRI is used to determine the major cardiac
+#' complication risk for a patient about to undergo major noncardiac surgery.
 #' The six predictors that make up the RCRI are: 1. high-risk surgery 2. history
-#' of ischemic heart disease 3. history of congestive heart failure 4. history 
-#' of cerebrovascular disease 5. preoperative treatment with insulin 6. 
+#' of ischemic heart disease 3. history of congestive heart failure 4. history
+#' of cerebrovascular disease 5. preoperative treatment with insulin 6.
 #' preoperative serum creatinine with Cr > 2 mg/dL.
-#' 
+#'
 #' In 2005 Boersma et al demonstrated that the Lee indexed can be adapted to use
-#' administrative data to predict cardiovascular mortality.  They used the 
-#' following for each point above: 1. retroperitoneal, intrathoracic, or 
-#' suprainguinal vascular procedure; 2. Ischemia: ICD-9 codes 410.*, 411.*, 
-#' 412.*, 413.*, 414.*; 3. CVA: ICD-9 428.*; 4. CHF: ICD-9 943.0; 5. DM: ICD-9 
+#' administrative data to predict cardiovascular mortality.  They used the
+#' following for each point above: 1. retroperitoneal, intrathoracic, or
+#' suprainguinal vascular procedure; 2. Ischemia: ICD-9 codes 410.*, 411.*,
+#' 412.*, 413.*, 414.*; 3. CVA: ICD-9 428.*; 4. CHF: ICD-9 943.0; 5. DM: ICD-9
 #' 425.0; 6. Renal: ICD-9 958.0.
-#' 
-#' This function merges the ICD-9 guidelines 
-#' used by Boersma with some of the other ICD-9 classifiers in this package. 
+#'
+#' This function merges the ICD-9 guidelines
+#' used by Boersma with some of the other ICD-9 classifiers in this package.
 #' This data set uses the following for each aspect of the RCRI:
 #' 1. procedure is left to you
 #' 2. 'ischemia' as defined in Boersma
@@ -374,29 +374,29 @@ icd9cm_elixhauser_ahrq37 <- function(icd9) {
 #' 4. 'chf' as defined by AHRQ in \code{\link{icd9cm_elixhauser_ahrq37}}
 #' 5. 'dm' as  defined by AHRQ (both 'dm' and 'dmcx')
 #' 6. renlfail' as defined by AHRQ.
-#' 
+#'
 #' @param icd9 a unique character vector of ICD-9-CM codes
 #' @return A data frame, with ICD9 codes as row names and logical columns for
 #' \code{chf}, \code{cvd}, \code{dm}, \code{ischemia}, and \code{renlfail}.
-#' @references 1. Lee TH, Marcantonio ER, Mangione CM, Thomas EJ, Polanczyk CA, 
-#'   Cook EF, Sugarbaker DJ, Donaldson MC, Poss R, Ho KK, Ludwig LE, Pedan A, 
-#'   Goldman L: Derivation and prospective validation of a simple index for 
-#'   prediction of cardiac risk of major noncardiac surgery. Circulation 1999; 
+#' @references 1. Lee TH, Marcantonio ER, Mangione CM, Thomas EJ, Polanczyk CA,
+#'   Cook EF, Sugarbaker DJ, Donaldson MC, Poss R, Ho KK, Ludwig LE, Pedan A,
+#'   Goldman L: Derivation and prospective validation of a simple index for
+#'   prediction of cardiac risk of major noncardiac surgery. Circulation 1999;
 #'   100:1043-9 \url{http://www.ncbi.nlm.nih.gov/pubmed/10477528}
-#'   
-#'   2. Boersma E, Kertai MD, Schouten O, Bax JJ, Noordzij P, Steyerberg EW, 
-#'   Schinkel AFL, Santen M van, Simoons ML, Thomson IR, Klein J, Urk H van, 
+#'
+#'   2. Boersma E, Kertai MD, Schouten O, Bax JJ, Noordzij P, Steyerberg EW,
+#'   Schinkel AFL, Santen M van, Simoons ML, Thomson IR, Klein J, Urk H van,
 #'   Poldermans D: Perioperative cardiovascular mortality in noncardiac surgery:
-#'   validation of the Lee cardiac risk index. The American journal of medicine 
+#'   validation of the Lee cardiac risk index. The American journal of medicine
 #'   2005; 118:1134-41 \url{http://www.ncbi.nlm.nih.gov/pubmed/16194645}
-#'   
-#' @seealso \code{\link{icd9cm_charlson_quan}}, \code{\link{icd9cm_elixhauser_quan}}, 
+#'
+#' @seealso \code{\link{icd9cm_charlson_quan}}, \code{\link{icd9cm_elixhauser_quan}},
 #'    \code{\link{icd9cm_elixhauser_ahrq37}}
 #' @export
-icd9cm_rcri <- function(icd9) { 
-  ahrq <- icd9cm_elixhauser_ahrq37(icd9)                                
+icd9cm_rcri <- function(icd9) {
+  ahrq <- icd9cm_elixhauser_ahrq37(icd9)
   quan <- icd9cm_charlson_quan(icd9)
-  
+
   data.frame(
     row.names = icd9,
     chf = ahrq$chf,
@@ -407,10 +407,10 @@ icd9cm_rcri <- function(icd9) {
 }
 
 #' Convert ICD-9-CM code list to dataframe
-#' 
+#'
 #' \code{melt_icd9list} uses \code{\link{ddply}} to melt a column of comma-separated ICD-9-CM
 #' codes into a series of rows, one for each code.
-#' 
+#'
 #' @param df a data frame with at least two columns, specified as \code{idvar}
 #'   and \code{icd9var}.
 #' @param idvar string with name of ID variable within \code{df} (defaults to "id")
@@ -421,23 +421,24 @@ icd9cm_rcri <- function(icd9) {
 #' @return a dataframe with two columns, \code{idvar} and \code{"icd9cm"}
 #' @importFrom plyr ddply
 #' @examples
-#' cases <- data.frame(id=c(1,2), icd9list=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'))
+#' cases <- data.frame(id=c(1,2),
+#'     icd9list=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'))
 #' melt_icd9list(cases, "id", "icd9list")
 #' @export
 melt_icd9list <- function(df, idvar="id", icd9var="icd9cm",
     .progress="none", .parallel=FALSE, .paropts=NULL) {
-    ddply(df, idvar, function(x) { 
+    ddply(df, idvar, function(x) {
         data.frame(
             icd9cm=unlist(strsplit(
-                paste(gsub('.','',x[,icd9var],fixed=TRUE),collapse=','),',',fixed=TRUE))) 
+                paste(gsub('.','',x[,icd9var],fixed=TRUE),collapse=','),',',fixed=TRUE)))
     }, .progress=.progress, .parallel=.parallel, .paropts=.paropts)
 }
 
 #' Merge ICD-9-CM diagnostic and procedure codes
-#' 
+#'
 #' Merges a dataframe containing ICD-9-CM diagostic codes with a dataframe containing ICD-9 procedure codes
 #' Diagnostic codes are prefixed with 'D', while procedure codes are prefixed with 'P'
-#' 
+#'
 #' @param dx_df a data frame with at least two columns, specified as \code{idvar}
 #'   and \code{icd9dxvar}, where the values are ICD-9 diagnostic codes
 #' @param proc_df a data frame with at least two columns, specified as \code{idvar}
@@ -447,7 +448,7 @@ melt_icd9list <- function(df, idvar="id", icd9var="icd9cm",
 #' @return a merged dataframe with common columns and \code{"icd9cm"}
 #' @examples
 #' cases <- data.frame(id=c(1,2),
-#'                     icd9dxlist=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'), 
+#'                     icd9dxlist=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'),
 #'                     icd9plist=c('38.16','38.42'))
 #' dx_df <- melt_icd9list(cases, "id", "icd9dxlist")
 #' proc_df <- melt_icd9list(cases, "id", "icd9plist")
@@ -473,30 +474,30 @@ merge_icd9_dx_and_procs <- function(dx_df, proc_df, icd9dxvar="icd9cm", icd9pvar
 }
 
 #' Generate a comorbidity dataframe
-#' 
-#' Merges a given DF of IDs and ICD-9-CM codes to one of the ICD9CM maps, 
+#'
+#' Merges a given DF of IDs and ICD-9-CM codes to one of the ICD9CM maps,
 #' removes redundant comorbidities, and returns a dataframe.
-#' 
+#'
 #' Redundancy rules:
 #' * If "tumor" and "mets", only "mets" will be returned.
 #' * If "htn" and "htncx", only "htncx" will be returned.
 #' * If "dm" and "dmcx", only "dmcx" will be returned.
 #' * If "liver" and "modliver", only "modliver" will be returned.
-#' 
+#'
 #' Van Walraven has a modification adopted here where the following "dmcx" codes
 #' are downgraded to "dm" if the specific DM complication is separately coded:
 #' * D2(49|50)4x is DM w renal
 #' * D2(49|50)6x is DM w neuro
 #' * D2(49|50)7x is DM w PVD
-#' 
+#'
 #' Cases without any comorbidities will not appear in the returned data
 #' frame.
-#' 
-#' @param df a data frame with at least two columns, specified as \code{idvar} 
+#'
+#' @param df a data frame with at least two columns, specified as \code{idvar}
 #'   and \code{icd9var}.
-#' @param idvar string with name of ID variable within \code{df} (defaults to 
+#' @param idvar string with name of ID variable within \code{df} (defaults to
 #'   "id")
-#' @param icd9var string with name of ICD code variable within \code{df} 
+#' @param icd9var string with name of ICD code variable within \code{df}
 #'   (defaults to \code{icd9cm})
 #' @param icd9mapfn Function to generate comorbidity data frame from ICD-9 codes
 #'   (defaults to \code{\link{icd9cm_charlson_quan}})
@@ -506,7 +507,7 @@ merge_icd9_dx_and_procs <- function(dx_df, proc_df, icd9dxvar="icd9cm", icd9pvar
 #' @return a dataframe with column \code{idvar} and a logical column for each comorbidity
 #' @importFrom plyr ddply
 #' @examples
-#' cases <- data.frame(id=c(1,1,1,2,2,2,2,2), 
+#' cases <- data.frame(id=c(1,1,1,2,2,2,2,2),
 #'          icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403","D1960","D1958"))
 #' generate_comorbidity_df(cases)
 #' # generate categories for patients in the \code{\link{vt_inp_sample}}
@@ -519,7 +520,7 @@ merge_icd9_dx_and_procs <- function(dx_df, proc_df, icd9dxvar="icd9cm", icd9pvar
 #'   icd9cm=c("D1970","D20206","D25071","D4439","D25001","D25040","D45621","D570"))
 #' generate_comorbidity_df(cases)
 #' @export
-generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm", 
+generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm",
                                  icd9mapfn=icd9cm_charlson_quan,
                                  .progress="none", .parallel=FALSE, .paropts=NULL) {
 
@@ -529,32 +530,32 @@ generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm",
 
   icd9map <- icd9mapfn(uniq_icd9map)
   cases_merged <- merge(df[,c(idvar,icd9var)], icd9map, by.x=icd9var, by.y="row.names", all.x=T)
-  
-  ddply(cases_merged, c(idvar), 
+
+  ddply(cases_merged, c(idvar),
         function(df) {
           rows <- c()
           # preprocess df with van Walraven step
-          if ((all(c("renal","dm","dmcx") %in% names(df)) & any(df$renal)) | 
+          if ((all(c("renal","dm","dmcx") %in% names(df)) & any(df$renal)) |
                 (all(c("renlfail","dm","dmcx") %in% names(df)) & any(df$renlfail))) {
             rows <- grep('^D2(49|50)4', df[,icd9var])
-            if (length(rows)) 
+            if (length(rows))
               df[rows, c("dm","dmcx")] <- c(T,F)
           }
-          if ((all(c("neuro","dm","dmcx") %in% names(df)) & any(df$neuro)) | 
+          if ((all(c("neuro","dm","dmcx") %in% names(df)) & any(df$neuro)) |
                 (all(c("cvd","dm","dmcx") %in% names(df)) & any(df$cvd))) {
             rows <- grep('^D2(49|50)6', df[,icd9var])
-            if (length(rows)) 
+            if (length(rows))
               df[rows, c("dm","dmcx")] <- c(T,F)
           }
           if (all(c("perivasc","dm","dmcx") %in% names(df)) & any(df$perivasc)) {
             rows <- grep('^D2(49|50)7', df[,icd9var])
-            if (length(rows)) 
+            if (length(rows))
               df[rows, c("dm","dmcx")] <- c(T,F)
           }
 
           # now merge rows together with any
           out <- data.frame(lapply(df[,names(icd9map)], any))
-          
+
           # postprocess: eliminate redundancy
           if (all(c("mets","tumor") %in% names(out))) {
             rows <- which(out$mets & out$tumor)
@@ -582,12 +583,12 @@ generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm",
 }
 
 #' Calculate the Charlson Comorbidity Index
-#' 
-#' \code{generate_charlson_index_df} merges a data frame of Charlson 
-#' comorbidities with \code{\link{charlson_weights}} and sums the results per 
+#'
+#' \code{generate_charlson_index_df} merges a data frame of Charlson
+#' comorbidities with \code{\link{charlson_weights}} and sums the results per
 #' patient.
-#' 
-#' @param df a data frame with ID column \code{idvar} and logical columns for each 
+#'
+#' @param df a data frame with ID column \code{idvar} and logical columns for each
 #' comorbidity, such as that generated by \code{\link{generate_comorbidity_df}}
 #' @param idvar string with name of ID variable within \code{df}
 #' @param weights defaults to \code{\link{charlson_weights}}
@@ -604,18 +605,18 @@ generate_charlson_index_df <- function(df, idvar="id", weights=medicalrisk::char
     if (empty(df)) {
       return(df)
     }
-        
+
     if (!exists(idvar,where=df)) {
       stop("Data frame must have variable specified in idvar")
     }
-    
+
     missing_cols <- setdiff(names(weights), names(df))
     if (length(missing_cols)) {
       stop(sprintf("Missing Charlson columns: %s", paste(missing_cols, collapse=",")))
     }
 
     # to generate index score, multiply weights by logical columns, then take row sum of that
-    rv <- data.frame(id=df[,idvar], 
+    rv <- data.frame(id=df[,idvar],
                      index=rowSums(df[,names(weights)] * weights))
     names(rv)[1] <- idvar
     rv
