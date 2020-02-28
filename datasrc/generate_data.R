@@ -1,6 +1,6 @@
 # Script to generate files in "data" subdirectory from files in "datasrc" subdirectory
 # Run this before running R CMD Check
-# 
+#
 # $Id: generate_data.R 4008 2016-01-23 20:59:21Z patrick $
 
 library(hash)
@@ -33,13 +33,13 @@ icd9cm_list <- (function(){
     }
     unzip(cms_icd9_zip, files = basename(cms_icd9_files), exdir = 'datasrc')
   }
-  
+
   f <- read.fwf(cms_icd9_dx_file, widths=c(5,255), colClasses="character", strip.white=T)
   dx <- paste0(rep.int('D',length(f$V1)), f$V1)
-  
+
   f <- read.fwf(cms_icd9_px_file, widths=c(4,255), colClasses="character", strip.white=T)
   px <- paste0(rep.int('P',length(f$V1)), f$V1)
-  
+
   c(dx,px)
 })()
 
@@ -96,7 +96,7 @@ elixhauser_list <- list(
   psych = "Psychoses",
   depress = "Depression"
 )
-  
+
 rcri_list <- list(
   chf = "Congestive heart failure",
   cvd = "Cerebrovascular disease",
@@ -158,13 +158,13 @@ vt_inp_sample <- (function() {
   df$scu_days[is.na(df$scu_days)] <- 0
   df_melt <- melt(df[,c(1,11:33,54:56)], id.vars=c("id","scu_days","drg","mdc"), na.rm=T,
                     variable.name="dx", value.name="icd9cm")
-  df_px_melt <- melt(df[,c(1,11:13,34:53)], id.vars=c("id","scu_days","drg","mdc"), na.rm=T, 
+  df_px_melt <- melt(df[,c(1,11:13,34:53)], id.vars=c("id","scu_days","drg","mdc"), na.rm=T,
                      variable.name="px", value.name="icd9cm")
   cols <- intersect(names(df_melt), names(df_px_melt))
   df_melt <- df_melt[nchar(df_melt$icd9cm) > 0, cols]
-  df_melt$icd9cm <- paste('D', df_melt$icd9cm, sep='') 
+  df_melt$icd9cm <- paste('D', df_melt$icd9cm, sep='')
   df_px_melt <- df_px_melt[nchar(df_px_melt$icd9cm) > 0, cols]
-  df_px_melt$icd9cm <- paste('P', df_px_melt$icd9cm, sep='') 
+  df_px_melt$icd9cm <- paste('P', df_px_melt$icd9cm, sep='')
   df_melt <- rbind(df_melt, df_px_melt)
   df_melt$icd9cm <- factor(df_melt$icd9cm)
   df_sorted <- df_melt[order(df_melt$id),]
@@ -209,7 +209,7 @@ rsi_files <- c(rsi_inhosp_csv, rsi_30dpod_csv, rsi_1yrpod_csv, rsi_30dlos_csv, r
   rsi_beta_30dpod$popbeta <- csv_30dpod[1,'PopBeta']
   rsi_beta_1yrpod$popbeta <- csv_1yrpod[1,'PopBeta']
   rsi_beta_30dlos$popbeta <- csv_30dlos[1,'PopBeta']
-  
+
   # create RDA files
   save(rsi_beta_inhosp, file="data/rsi_beta_inhosp.rda", compress=TRUE)
   save(rsi_beta_30dpod, file="data/rsi_beta_30dpod.rda", compress=TRUE)
