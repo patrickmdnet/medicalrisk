@@ -548,18 +548,18 @@ generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm",
                 (all(c("renlfail","dm","dmcx") %in% names(df)) & any(df$renlfail))) {
             rows <- grep('^D2(49|50)4', df[,icd9var])
             if (length(rows))
-              df[rows, c("dm","dmcx")] <- c(T,F)
+              df[rows, c("dm", "dmcx")] <- matrix(rep(c(T,F), length(rows)), byrow = TRUE, ncol = 2)
           }
           if ((all(c("neuro","dm","dmcx") %in% names(df)) & any(df$neuro)) |
                 (all(c("cvd","dm","dmcx") %in% names(df)) & any(df$cvd))) {
             rows <- grep('^D2(49|50)6', df[,icd9var])
             if (length(rows))
-              df[rows, c("dm","dmcx")] <- c(T,F)
+              df[rows, c("dm", "dmcx")] <- matrix(rep(c(T,F), length(rows)), byrow = TRUE, ncol = 2)
           }
           if (all(c("perivasc","dm","dmcx") %in% names(df)) & any(df$perivasc)) {
             rows <- grep('^D2(49|50)7', df[,icd9var])
             if (length(rows))
-              df[rows, c("dm","dmcx")] <- c(T,F)
+              df[rows, c("dm", "dmcx")] <- matrix(rep(c(T,F), length(rows)), byrow = TRUE, ncol = 2)
           }
 
           # now merge rows together with any
