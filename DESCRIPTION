@@ -1,8 +1,8 @@
 Package: medicalrisk
 Type: Package
 Title: Medical Risk and Comorbidity Tools for ICD-9-CM Data
-Version: 1.2
-Date: 2016-01-23
+Version: 1.3
+Date: 2020-02-28
 Authors@R: c(person("Patrick", "McCormick", role = c("aut", "cre"),
                email = "patrick.mccormick@alum.mit.edu"),
              person("Thomas", "Joseph", role = "aut",
@@ -28,6 +28,7 @@ Suggests:
 License: GPL-3 | file LICENSE
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 5.0.1
+RoxygenNote: 7.0.2
+Encoding: UTF-8
 BugReports: https://github.com/patrickmdnet/medicalrisk/issues
 URL: https://github.com/patrickmdnet/medicalrisk
