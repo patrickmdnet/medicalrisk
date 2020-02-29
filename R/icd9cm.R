@@ -27,7 +27,7 @@
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"),
-#'   stringsAsFactors=T)
+#'   stringsAsFactors=TRUE)
 #' cases_with_cm <- merge(cases, icd9cm_charlson_deyo(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
 #'
@@ -87,7 +87,7 @@ icd9cm_charlson_deyo <- function(icd9) {
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"),
-#'   stringsAsFactors=T)
+#'   stringsAsFactors=TRUE)
 #' cases_with_cm <- merge(cases, icd9cm_charlson_romano(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
 #'
@@ -147,7 +147,7 @@ icd9cm_charlson_romano <- function(icd9) {
 #' # Identify Charlson categories in ICD-9-CM listing
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"),
-#'   stringsAsFactors=T)
+#'   stringsAsFactors=TRUE)
 #' cases_with_cm <- merge(cases, icd9cm_charlson_quan(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
 #'
@@ -208,7 +208,7 @@ icd9cm_charlson_quan <- function(icd9) {
 #' # Identify Elixhauser categories
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"),
-#'   stringsAsFactors=T)
+#'   stringsAsFactors=TRUE)
 #' cases_with_cm <- merge(cases, icd9cm_elixhauser_quan(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
 #'
@@ -288,7 +288,7 @@ icd9cm_elixhauser_quan <- function(icd9) {
 #' # Identify Elixhauser categories
 #' cases <- data.frame(id=c(1,1,1,2,2,2),
 #'   icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403"),
-#'   stringsAsFactors=T)
+#'   stringsAsFactors=TRUE)
 #' cases_with_cm <- merge(cases, icd9cm_elixhauser_ahrq37(levels(cases$icd9cm)),
 #'   by.x="icd9cm", by.y="row.names", all.x=TRUE)
 #'
@@ -428,7 +428,7 @@ icd9cm_rcri <- function(icd9) {
 #' @examples
 #' cases <- data.frame(id=c(1,2),
 #'     icd9list=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'),
-#'     stringsAsFactors=T)
+#'     stringsAsFactors=TRUE)
 #' melt_icd9list(cases, "id", "icd9list")
 #' @export
 melt_icd9list <- function(df, idvar="id", icd9var="icd9cm",
@@ -456,7 +456,7 @@ melt_icd9list <- function(df, idvar="id", icd9var="icd9cm",
 #' cases <- data.frame(id=c(1,2),
 #'                     icd9dxlist=c('162.4,070.30,155.0,401.9','996.52,E878.8,V45.86'),
 #'                     icd9plist=c('38.16','38.42'),
-#'                     stringsAsFactors=T)
+#'                     stringsAsFactors=TRUE)
 #' dx_df <- melt_icd9list(cases, "id", "icd9dxlist")
 #' proc_df <- melt_icd9list(cases, "id", "icd9plist")
 #' merge_icd9_dx_and_procs(dx_df, proc_df)
@@ -516,7 +516,7 @@ merge_icd9_dx_and_procs <- function(dx_df, proc_df, icd9dxvar="icd9cm", icd9pvar
 #' @examples
 #' cases <- data.frame(id=c(1,1,1,2,2,2,2,2),
 #'          icd9cm=c("D20206","D24220","D4439","D5064","DE8788","D40403","D1960","D1958"),
-#'          stringsAsFactors=T)
+#'          stringsAsFactors=TRUE)
 #' generate_comorbidity_df(cases)
 #' # generate categories for patients in the \code{\link{vt_inp_sample}}
 #' generate_comorbidity_df(vt_inp_sample)
