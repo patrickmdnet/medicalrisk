@@ -525,7 +525,8 @@ merge_icd9_dx_and_procs <- function(dx_df, proc_df, icd9dxvar="icd9cm", icd9pvar
 #' # D25001 and D25040 are just "dmcx"
 #' # D45621 and D570 are just "modliver"
 #' cases <- data.frame(id=c(1,1,1,1,2,2,2,2),
-#'   icd9cm=c("D1970","D20206","D25071","D4439","D25001","D25040","D45621","D570"))
+#'   icd9cm=c("D1970","D20206","D25071","D4439","D25001","D25040","D45621","D570"),
+#'   stringsAsFactors=TRUE)
 #' generate_comorbidity_df(cases)
 #' @export
 generate_comorbidity_df <- function(df, idvar="id", icd9var="icd9cm",
